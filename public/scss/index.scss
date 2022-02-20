@@ -123,6 +123,9 @@ body {
 }
 
 @media only screen and (max-width: $breakpoint-tablet) {
+    #title-text {
+        margin-top: 1em !important;
+    }
     .bg-img {
         background-size: 235% !important;
     }
