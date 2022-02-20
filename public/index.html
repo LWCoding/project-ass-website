@@ -14,12 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <div id="nav-placeholder"></div>
-    <div class="relative-container">
-        <img class="bg-img img-fluid" src="./img/treehouse.png" alt="Treehouse background">
+    <div style="height: 60vh;" class="relative-container">
+        <div class="bg-img" style="object-fit: contain; background-size: 120%; background-position: center; background-repeat: no-repeat; height: 60vh; background-image: url('./img/treehouse.png')"></div>
         <div id="particles-js" class="bg-img-cosmetic-overlay"></div>
         <div class="text-center bg-img-overlay">
             <h1 id="title-text" class="mt-4 animate__animated animate__fadeInDown animate__slow"></h1>
-            <p id="title-description" class="animate__animated animate__fadeInUp animate__delay-2s animate__slow">Explore the wonderful outdoors... to an extent.</p>
+            <p id="title-description" class="px-5 animate__animated animate__fadeInUp animate__delay-2s animate__slow">Explore the wonderful outdoors... to an extent.</p>
         </div>
     </div>
     <div class="filler"></div>
@@ -27,7 +27,7 @@
         <div id="developer-panel-child" class="text-center row mx-5">
             <div class="col-md-4 col-sm-12">
                 <div class="developer-content">
-                    <img class="animate__animated animate__jackInTheBox panel-pfp img-fluid mb-3" src="./img/ariel.jpg" alt="Profile picture">
+                    <img class="animate__animated panel-pfp img-fluid mb-3" src="./img/ariel.jpg" alt="Profile picture">
                     <div class="developer-text-content">
                         <div class="developer-contact-info-content-sm">
                             <h3 class="developer-name">Ariel</h3>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="developer-content">
-                    <img style="animation-delay: 0.3s;" class="animate__animated animate__jackInTheBox panel-pfp img-fluid mb-3" src="./img/selenium.png" alt="Profile picture">
+                    <img style="animation-delay: 0.3s;" class="animate__animated panel-pfp img-fluid mb-3" src="./img/selenium.png" alt="Profile picture">
                     <div class="developer-text-content">
                         <div class="developer-contact-info-content-sm">
                             <h3 class="developer-name">Selenium</h3>
@@ -73,7 +73,7 @@
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="developer-content">
-                    <img style="animation-delay: 0.6s;" class="animate__animated animate__jackInTheBox panel-pfp img-fluid mb-3" src="./img/silver.png" alt="Profile picture">
+                    <img style="animation-delay: 0.6s;" class="animate__animated panel-pfp img-fluid mb-3" src="./img/silver.png" alt="Profile picture">
                     <div class="developer-text-content">
                         <div class="developer-contact-info-content-sm">
                             <h3 class="developer-name">Silver</h3> 
@@ -96,7 +96,9 @@
             </div>
         </div>
     </div>
-    <div style="width: 1px; height: 20vh;"></div>
+    <div id="push-down"></div>
+    <div id="footer-placeholder"></div>
+    <script defer src="./js/footer.js"></script>
     <script defer src="./js/navbar.js"></script>
     <script defer src="./js/index.js"></script>
     <script>

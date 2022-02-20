@@ -78,10 +78,13 @@ body {
   border-radius: 100%;
 }
 
+#push-down {
+  height: 320px;
+}
+
 @media only screen and (max-width: 992px) {
   .bg-img {
-    object-fit: cover;
-    height: 600px !important;
+    background-size: 150% !important;
   }
 
   #title-text {
@@ -114,8 +117,20 @@ body {
   }
 }
 @media only screen and (max-width: 768px) {
+  .bg-img {
+    background-size: 235% !important;
+  }
+
+  #push-down {
+    display: none;
+  }
+
   #developer-panel-child > div {
     margin-top: 2em;
+  }
+
+  #developer-panel-child:last-child {
+    margin-bottom: 2em;
   }
 
   .panel-pfp {
@@ -152,6 +167,10 @@ body {
   }
 }
 @media only screen and (max-width: 500px) {
+  .bg-img {
+    background-size: 260% !important;
+  }
+
   .developer-content {
     flex-direction: column !important;
     align-items: center;
