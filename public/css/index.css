@@ -8,6 +8,12 @@ body {
   z-index: 0;
   filter: brightness(60%);
   width: auto;
+  object-fit: contain;
+  background-size: 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../img/treehouse.png");
+  height: 60vh;
 }
 
 .bg-img-overlay {
@@ -29,6 +35,7 @@ body {
 
 .relative-container {
   position: relative;
+  height: 60vh;
 }
 
 #title-text {
@@ -117,12 +124,17 @@ body {
   }
 }
 @media only screen and (max-width: 768px) {
+  .relative-container {
+    height: 80vh;
+  }
+
   #title-text {
     margin-top: 1em !important;
   }
 
   .bg-img {
-    background-size: 235% !important;
+    height: 80vh !important;
+    background-size: 320% !important;
   }
 
   #push-down {
@@ -172,7 +184,7 @@ body {
 }
 @media only screen and (max-width: 500px) {
   .bg-img {
-    background-size: 260% !important;
+    background-size: 400% !important;
   }
 
   .developer-content {
