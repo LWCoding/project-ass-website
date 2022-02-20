@@ -114,7 +114,7 @@ body {
   }
 }
 @media only screen and (max-width: 768px) {
-  #developer-panel-child:first-child {
+  #developer-panel-child > div {
     margin-top: 2em;
   }
 
@@ -146,9 +146,16 @@ body {
     flex-direction: row;
   }
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 600px) {
   .developer-contact-info-sm {
     display: none !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .developer-content {
+    flex-direction: column !important;
+    align-items: center;
+    width: 100%;
   }
 }
 

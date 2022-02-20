@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap');
 
 $divider-color: linear-gradient(to right, #3b3b3b, #3b3b3b 15%, #237530 15%, #237530 85%, #3b3b3b 85%);
-$breakpoint-mini: 640px;
+$breakpoint-mini: 500px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-large: 1200px;
@@ -120,7 +120,7 @@ body {
 }
 
 @media only screen and (max-width: $breakpoint-tablet) {
-    #developer-panel-child:first-child {
+    #developer-panel-child > div {
         margin-top: 2em;
     }
     .panel-pfp {
@@ -147,8 +147,17 @@ body {
     }
 }
 
-@media only screen and (max-width: $breakpoint-mini) {
+// Remove the Discord contact info (because it's too long)
+@media only screen and (max-width: 600px) {
     .developer-contact-info-sm {
         display: none !important;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-mini) {
+    .developer-content {
+        flex-direction: column !important;
+        align-items: center;
+        width: 100%;
     }
 }
