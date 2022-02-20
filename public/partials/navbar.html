@@ -1,0 +1,86 @@
+<body>
+    <div id="navbar-container">
+        <nav class="mx-3 navbar navbar-light navbar-expand-sm">
+            <a class="animate__animated animate__pulse animate__fast navbar-brand" href="#">
+                <img id="navbar-logo" width=50 height=50 src="./img/emblem.png">
+            </a>
+            <button class="animate__animated animate__pulse navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarMenu" class="justify-content-end collapse navbar-collapse">
+                <ul class="navbar-nav align-items-center">
+                    <li class="animate__animated animate__fadeInDown animate__fast nav-item">
+                        <a class="nav-link green-bg-on-hover" href="#">About</a>
+                    </li>
+                    <li style="animation-delay: 250ms;" class="animate__animated animate__fadeInDown animate__fast nav-item">
+                        <a class="nav-link green-bg-on-hover" href="#">Contact</a>
+                    </li>
+                    <li style="animation-delay: 500ms;" id="download-button" class="animate__animated animate__fadeInDown animate__fast nav-item">
+                        <a id="navbar-download-button" class="animate__animated nav-link" href="#">
+                            <button type="button" class="btn btn-success">
+                                Download
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</body>
+<style>
+    #navbar-container {
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.6);
+        position: absolute;
+        z-index: 99;
+    }
+
+    .navbar-toggler {
+        padding: 0.5rem;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        color: rgb(41, 41, 41) !important;
+        margin-left: 4px;
+    }
+
+    #navbar-logo {
+        transition: all 0.3s ease;
+        opacity: 0.8;
+    }
+
+    #navbar-logo:hover {
+        transform: scale(1.05, 1.05);
+        opacity: 0.9;
+    }
+
+    @media (min-width: 576px) { 
+        .green-bg-on-hover:hover, .green-bg-on-hover:active, .green-bg-on-hover:focus {
+            color: rgb(255, 255, 255) !important;
+            background-color: rgb(53, 148, 100);
+        }
+    }
+
+    @media (max-width: 576px) { 
+        #download-button {
+            display: none;
+        }
+        .green-bg-on-hover:hover, .green-bg-on-hover:active, .green-bg-on-hover:focus {
+            transform: scale(1.08);
+            font-weight: 700;
+        }
+    }
+</style>
+<script>
+    let downloadButton = document.getElementById("navbar-download-button")
+    downloadButton.addEventListener("mouseover", () => {
+        downloadButton.classList.add("animate__tada")
+    })
+    downloadButton.addEventListener("mouseleave", () => {
+        downloadButton.classList.remove("animate__tada")
+    })
+</script>
