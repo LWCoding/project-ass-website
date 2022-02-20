@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap');
 
-$divider-color: gray;
+$divider-color: linear-gradient(to right, #3b3b3b, #3b3b3b 15%, #237530 15%, #237530 85%, #3b3b3b 85%);
+$breakpoint-mini: 640px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-large: 1200px;
+
+body {
+    overflow-x: hidden;
+}
 
 .bg-img {
     position: relative;
@@ -46,13 +51,38 @@ $breakpoint-large: 1200px;
 }
 
 .filler {
-    background-color: $divider-color;
+    background: $divider-color;
     width: 100vw;
     height: 40px;
 }
 
 #developer-panel-child {
     max-width: 800px;
+}
+
+.developer-name {
+    color: black;
+}
+
+.developer-role {
+    color: rgb(72, 194, 109);
+}
+
+.developer-desc {
+    color: gray;
+}
+
+.developer-contact-info {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.developer-contact-info-content-sm {
+    display: none;
+}
+
+.panel-pfp {
+    border-radius: 100%;
 }
 
 @media only screen and (max-width: $breakpoint-laptop) {
@@ -78,7 +108,6 @@ $breakpoint-large: 1200px;
         max-width: 85% !important;
         background-color: gray;
         border: 20px solid gray;
-        border-radius: 100%;
     }
     #developer-panel {
         position: relative;
@@ -86,6 +115,40 @@ $breakpoint-large: 1200px;
     #developer-panel-child {
         position: absolute;
         top: 0;
-        transform: translate(0, -40%);
+        transform: translate(0, -35%);
+    }
+}
+
+@media only screen and (max-width: $breakpoint-tablet) {
+    #developer-panel-child:first-child {
+        margin-top: 2em;
+    }
+    .panel-pfp {
+        width: 160px !important;
+        height: 160px !important;
+        margin-right: 2em;
+    }
+    .developer-content {
+        display: flex;
+        flex-direction: row !important;
+    }
+    .developer-text-content {
+        text-align: left;
+    }
+    .developer-contact-info {
+        display: none;
+    }
+    .developer-contact-info-sm {
+        display: block;
+    }
+    .developer-contact-info-content-sm {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-mini) {
+    .developer-contact-info-sm {
+        display: none !important;
     }
 }

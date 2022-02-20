@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap");
+body {
+  overflow-x: hidden;
+}
+
 .bg-img {
   position: relative;
   z-index: 0;
@@ -40,13 +44,38 @@
 }
 
 .filler {
-  background-color: gray;
+  background: linear-gradient(to right, #3b3b3b, #3b3b3b 15%, #237530 15%, #237530 85%, #3b3b3b 85%);
   width: 100vw;
   height: 40px;
 }
 
 #developer-panel-child {
   max-width: 800px;
+}
+
+.developer-name {
+  color: black;
+}
+
+.developer-role {
+  color: #48c26d;
+}
+
+.developer-desc {
+  color: gray;
+}
+
+.developer-contact-info {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.developer-contact-info-content-sm {
+  display: none;
+}
+
+.panel-pfp {
+  border-radius: 100%;
 }
 
 @media only screen and (max-width: 992px) {
@@ -72,7 +101,6 @@
     max-width: 85% !important;
     background-color: gray;
     border: 20px solid gray;
-    border-radius: 100%;
   }
 
   #developer-panel {
@@ -82,7 +110,45 @@
   #developer-panel-child {
     position: absolute;
     top: 0;
-    transform: translate(0, -40%);
+    transform: translate(0, -35%);
+  }
+}
+@media only screen and (max-width: 768px) {
+  #developer-panel-child:first-child {
+    margin-top: 2em;
+  }
+
+  .panel-pfp {
+    width: 160px !important;
+    height: 160px !important;
+    margin-right: 2em;
+  }
+
+  .developer-content {
+    display: flex;
+    flex-direction: row !important;
+  }
+
+  .developer-text-content {
+    text-align: left;
+  }
+
+  .developer-contact-info {
+    display: none;
+  }
+
+  .developer-contact-info-sm {
+    display: block;
+  }
+
+  .developer-contact-info-content-sm {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .developer-contact-info-sm {
+    display: none !important;
   }
 }
 
