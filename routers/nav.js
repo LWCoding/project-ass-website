@@ -3,8 +3,8 @@ const path = require("path")
 
 navRouter = express.Router()
 
-navRouter.get("/contact", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/contact.html"))
+navRouter.get("/changelogs", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/changelogs.html"))
 })
 
 navRouter.get("/about", (req, res) => {
