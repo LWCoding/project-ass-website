@@ -23,7 +23,6 @@ function checkForAndAnimatePanelPFPs() {
 
         if (windowOffsetTop >= panelPFPOffsetTop && !panelPFP.classList.contains("animate__jackInTheBox")) {
             panelPFPsRendered++
-            console.log("rendered")
             addClass(panelPFP, "animate__jackInTheBox")
             if (panelPFPsRendered == 3) {
                 document.removeEventListener("scroll", checkForAndAnimatePanelPFPs)
