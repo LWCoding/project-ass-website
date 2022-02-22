@@ -1,0 +1,108 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/2.0.1/spinkit.min.css" integrity="sha512-kRYkjiYH/VXxoiaDK2oGNMKIi8VQVfie1lkYGX3kmfzWNR2kfaF5ze0885W3/eE6lIiURBsZA91M/WNvCajHMw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="login-block" class="vw-100 my-5">
+        <div id="l-form-bounds" class="mx-auto border p-3 container-fluid">
+            <h2 class="text-center mb-2">Login</h2>
+            <form id="login-form">
+                <div class="form-group mb-2">
+                    <label for="username-field">Username</label>
+                    <input type="text" class="form-control" id="l-username-field" aria-describedby="username-tooltip" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="password-field">Password</label>
+                    <input type="password" class="form-control" id="l-password-field" placeholder="Enter Password" required>
+                </div>
+                <div class="d-flex">
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="l-remember-me">
+                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <a class="ms-auto link-secondary" href="#" id="switch-to-register">Don't have an account?</a>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <p id="l-response-message" class="animate__animated mt-3 mb-0 text-warning"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<style>
+    #l-form-bounds {
+        width: 60%;
+    }
+</style>
+<script>
+    const loginForm = document.getElementById("login-form")
+    const loginMessage = document.getElementById("l-response-message")
+    
+    loginForm.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        registerFormPending("Sending your request, please wait.")
+        let username = document.getElementById("l-username-field").value
+        let password = document.getElementById("l-password-field").value
+        let res = await fetch("/login", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                username, password
+            })
+        })
+        if (!res.ok) { // Login request fails
+            let json = await res.json()
+            registerFormError(json.msg)
+        } else { // Login request succeeds
+            let json = await res.json()
+            alert(json.msg)
+        }
+    });
+
+    function registerFormPending(message) {
+        loginMessage.style.display = "block"
+        loginMessage.classList.remove("animate__fadeOut", "text-danger")
+        loginMessage.classList.add("animate__fadeIn", "text-warning")
+        loginMessage.textContent = message
+        setTimeout(() => {
+            loginMessage.classList.add("animate__fadeOut")
+            loginMessage.classList.remove("animate__fadeIn")
+        }, 2500)
+        setTimeout(() => {
+            loginMessage.style.display = "none"
+        }, 3250)
+    }
+
+    function registerFormError(message) {
+        loginMessage.style.display = "block"
+        loginMessage.classList.remove("animate__fadeOut", "text-warning")
+        loginMessage.classList.add("animate__fadeIn", "text-danger")
+        loginMessage.textContent = message
+        setTimeout(() => {
+            loginMessage.classList.add("animate__fadeOut")
+            loginMessage.classList.remove("animate__fadeIn")
+        }, 2500)
+        setTimeout(() => {
+            loginMessage.style.display = "none"
+        }, 3250)
+    }
+</script>
+<script defer>
+    const loginBlock = document.getElementById("account-login-placeholder")
+
+    const switchToRegister = document.getElementById("switch-to-register")
+    switchToRegister.onclick = function() {
+        loginBlock.style.pointerEvents = "none";
+        loginBlock.classList.add("animate__animated", "animate__fadeOut")
+        setTimeout(() => {
+            loginBlock.style.pointerEvents = "auto";
+            loginBlock.style.display = "none";
+            document.getElementById("account-register-placeholder").classList.remove("animate__animated", "animate__fadeOut")
+            document.getElementById("account-register-placeholder").style.display = "block";
+            document.getElementById("account-register-placeholder").classList.add("animate__animated", "animate__fadeIn")
+        }, 800)
+        return false
+    }
+</script>

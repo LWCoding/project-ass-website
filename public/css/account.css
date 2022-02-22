@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap");
+body {
+  overflow-x: hidden;
+}
+
+.bg-img {
+  background-image: url("../img/jack-watch.png");
+}
+
+@media only screen and (min-width: 768px) {
+  .bg-img {
+    background-position: right !important;
+  }
+}
+
+/*# sourceMappingURL=account.css.map */

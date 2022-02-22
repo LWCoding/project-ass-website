@@ -11,4 +11,8 @@ navRouter.get("/about", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/about.html"))
 })
 
+navRouter.get("/account", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/account.html"))
+})
+
 module.exports = navRouter

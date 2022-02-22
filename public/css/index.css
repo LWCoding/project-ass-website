@@ -1,59 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap");
+.bg-img {
+  background-image: url("../img/treehouse.png");
+}
+
 body {
   overflow-x: hidden;
-}
-
-.bg-img {
-  position: relative;
-  z-index: 0;
-  filter: brightness(60%);
-  width: auto;
-  object-fit: contain;
-  background-size: 120%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url("../img/treehouse.png");
-  height: 60vh;
-}
-
-.bg-img-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.bg-img-cosmetic-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-}
-
-.relative-container {
-  position: relative;
-  height: 60vh;
-}
-
-#title-text {
-  width: 100vw;
-  color: white;
-  font-size: 6em;
-  font-family: "Source Code Pro";
-}
-
-#title-description {
-  color: #d4d4d4;
-  font-size: 2.1em;
-}
-
-.filler {
-  background: linear-gradient(to right, #3b3b3b, #3b3b3b 15%, #237530 15%, #237530 85%, #3b3b3b 85%);
-  width: 100vw;
-  height: 40px;
 }
 
 #developer-panel-child {
@@ -89,22 +40,6 @@ body {
   height: 320px;
 }
 
-@media only screen and (max-width: 992px) {
-  .bg-img {
-    background-size: 150% !important;
-  }
-
-  #title-text {
-    color: white;
-    font-size: 4em;
-    font-family: "Source Code Pro";
-  }
-
-  #title-description {
-    color: #d4d4d4;
-    font-size: 1.4em;
-  }
-}
 @media only screen and (min-width: 768px) {
   .panel-pfp {
     width: 500px;
@@ -124,19 +59,6 @@ body {
   }
 }
 @media only screen and (max-width: 768px) {
-  .relative-container {
-    height: 80vh;
-  }
-
-  #title-text {
-    margin-top: 1em !important;
-  }
-
-  .bg-img {
-    height: 80vh !important;
-    background-size: 320% !important;
-  }
-
   #push-down {
     display: none;
   }
@@ -183,10 +105,6 @@ body {
   }
 }
 @media only screen and (max-width: 500px) {
-  .bg-img {
-    background-size: 400% !important;
-  }
-
   .developer-content {
     flex-direction: column !important;
     align-items: center;

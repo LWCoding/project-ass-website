@@ -1,0 +1,120 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/2.0.1/spinkit.min.css" integrity="sha512-kRYkjiYH/VXxoiaDK2oGNMKIi8VQVfie1lkYGX3kmfzWNR2kfaF5ze0885W3/eE6lIiURBsZA91M/WNvCajHMw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="register-block" class="vw-100 my-5">
+        <div id="r-form-bounds" class="mx-auto border p-3 container-fluid">
+            <h2 class="text-center mb-2">Register</h2>
+            <form id="register-form">
+                <div class="form-group mb-2">
+                    <label for="username-field">Username</label>
+                    <input type="text" class="form-control" id="r-username-field" aria-describedby="username-tooltip" placeholder="Enter Username" required>
+                    <small id="username-tooltip" class="form-text text-muted">Anything you post on this website will be under this username.</small>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="password-field">Password</label>
+                    <input type="password" class="form-control" id="r-password-field" placeholder="Enter Password" required>
+                    <small id="username-tooltip" class="form-text text-muted">Must be at least 8 characters long.</small>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="reenter-field">Reenter Password</label>
+                    <input type="password" class="form-control" id="r-reenter-field" placeholder="Enter Password (Again)" required>
+                </div>
+                <div class="d-flex">
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="r-remember-me">
+                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <a class="ms-auto link-secondary" href="#" id="switch-to-login">Already have an account?</a>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <p id="r-response-message" class="animate__animated mt-3 mb-0 text-warning"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<style>
+    #r-form-bounds {
+        width: 60%;
+    }
+</style>
+<script>
+    const registerForm = document.getElementById("register-form")
+    const registerMessage = document.getElementById("r-response-message")
+    const registerBlock = document.getElementById("account-register-placeholder")
+    
+    registerForm.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        registerBlock.style.pointerEvents = "none";
+        registerFormPending("Sending your request, please wait.")
+        let username = document.getElementById("r-username-field").value
+        let password = document.getElementById("r-password-field").value
+        let reenter = document.getElementById("r-reenter-field").value
+        if (password != reenter) {
+            registerFormError("Your password and re-entered password do not match.")
+            return
+        }
+        let res = await fetch("/register", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                username, password
+            })
+        })
+        if (!res.ok) { // Register request fails
+            let json = await res.json()
+            registerFormError(json.msg)
+        } else { // Register request succeeds
+            let json = await res.json()
+            alert(json.msg)
+        }
+        registerBlock.style.pointerEvents = "auto";
+    });
+
+    function registerFormPending(message) {
+        registerMessage.style.display = "block"
+        registerMessage.classList.remove("animate__fadeOut", "text-danger")
+        registerMessage.classList.add("animate__fadeIn", "text-warning")
+        registerMessage.textContent = message
+        setTimeout(() => {
+            registerMessage.classList.add("animate__fadeOut")
+            registerMessage.classList.remove("animate__fadeIn")
+        }, 2500)
+        setTimeout(() => {
+            registerMessage.style.display = "none"
+        }, 3250)
+    }
+
+    function registerFormError(message) {
+        registerMessage.style.display = "block"
+        registerMessage.classList.remove("animate__fadeOut", "text-warning")
+        registerMessage.classList.add("animate__fadeIn", "text-danger")
+        registerMessage.textContent = message
+        setTimeout(() => {
+            registerMessage.classList.add("animate__fadeOut")
+            registerMessage.classList.remove("animate__fadeIn")
+        }, 2500)
+        setTimeout(() => {
+            registerMessage.style.display = "none"
+        }, 3250)
+    }
+</script>
+<script defer>
+    const switchToLogin = document.getElementById("switch-to-login")
+    switchToLogin.onclick = function() {
+        registerBlock.style.pointerEvents = "none";
+        registerBlock.classList.add("animate__animated", "animate__fadeOut")
+        setTimeout(() => {
+            registerBlock.style.pointerEvents = "auto";
+            registerBlock.style.display = "none";
+            document.getElementById("account-login-placeholder").classList.remove("animate__animated", "animate__fadeOut")
+            document.getElementById("account-login-placeholder").style.display = "block";
+            document.getElementById("account-login-placeholder").classList.add("animate__animated", "animate__fadeIn")
+        }, 800)
+        return false
+    }
+</script>
