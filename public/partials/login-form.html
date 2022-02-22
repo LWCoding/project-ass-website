@@ -37,10 +37,12 @@
 <script>
     const loginForm = document.getElementById("login-form")
     const loginMessage = document.getElementById("l-response-message")
+    const loginBlock = document.getElementById("account-login-placeholder")
     
     loginForm.addEventListener("submit", async function(e) {
         e.preventDefault();
-        registerFormPending("Sending your request, please wait.")
+        loginBlock.style.pointerEvents = "none";
+        loginFormPending("Sending your request, please wait.")
         let username = document.getElementById("l-username-field").value
         let password = document.getElementById("l-password-field").value
         let res = await fetch("/login", {
@@ -54,14 +56,15 @@
         })
         if (!res.ok) { // Login request fails
             let json = await res.json()
-            registerFormError(json.msg)
+            loginFormError(json.msg)
         } else { // Login request succeeds
             let json = await res.json()
             alert(json.msg)
         }
+        loginBlock.style.pointerEvents = "auto";
     });
 
-    function registerFormPending(message) {
+    function loginFormPending(message) {
         loginMessage.style.display = "block"
         loginMessage.classList.remove("animate__fadeOut", "text-danger")
         loginMessage.classList.add("animate__fadeIn", "text-warning")
@@ -75,7 +78,7 @@
         }, 3250)
     }
 
-    function registerFormError(message) {
+    function loginFormError(message) {
         loginMessage.style.display = "block"
         loginMessage.classList.remove("animate__fadeOut", "text-warning")
         loginMessage.classList.add("animate__fadeIn", "text-danger")
@@ -90,8 +93,6 @@
     }
 </script>
 <script defer>
-    const loginBlock = document.getElementById("account-login-placeholder")
-
     const switchToRegister = document.getElementById("switch-to-register")
     switchToRegister.onclick = function() {
         loginBlock.style.pointerEvents = "none";
