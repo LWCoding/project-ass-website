@@ -1,16 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Source+Code+Pro:wght@600&display=swap');
 
-$divider-color: linear-gradient(to right, #3b3b3b, #3b3b3b 15%, #237530 15%, #237530 85%, #3b3b3b 85%);
 $breakpoint-mini: 500px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
 $breakpoint-large: 1200px;
-
-.filler {
-    background: $divider-color;
-    width: 100vw;
-    height: 40px;
-}
 
 .bg-img {
     position: relative;
