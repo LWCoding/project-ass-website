@@ -13,8 +13,38 @@ body {
     background-image: url('../img/jack-watch.png');
 }
 
+#account-hover-block {
+    z-index: 2; 
+    position: fixed; 
+    width: 100vw; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+#account-hover-block::before {
+    content: "hello";
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
 @media only screen and (min-width: $breakpoint-tablet) {
     .bg-img {
         background-position: right !important;
+    }
+    #not-logged-in {
+        width: 75vw;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-tablet) {
+    #not-logged-in {
+        width: 90vw;
     }
 }

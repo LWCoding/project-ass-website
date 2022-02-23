@@ -51,6 +51,30 @@ $breakpoint-large: 1200px;
     font-size: 2.1em;
 }
 
+@media only screen and (min-width: $breakpoint-tablet) {
+    .shake-on-hover:hover {
+        animation: shake 0.7s ease;
+    }
+    
+    @keyframes shake {
+        22% {
+            transform: rotate(30deg);
+        }
+    
+        44% {
+            transform: rotate(-30deg);
+        }
+    
+        66% {
+            transform: rotate(15deg);
+        }
+    
+        88% {
+            transform: rotate(-7deg);
+        }
+    }
+}
+
 @media only screen and (max-width: $breakpoint-laptop) {
     .bg-img {
         background-size: 150% !important;

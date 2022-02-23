@@ -22,12 +22,36 @@
             <p id="title-description" class="px-5 animate__animated animate__fadeInUp animate__delay-2s animate__slow">Manage your public presence and provide feedback.</p>
         </div>
     </div>
-    <div id="account-register-placeholder"></div>
-    <div id="account-login-placeholder"></div>
+    <div id="account-hover-block" style="display: none;">
+        <div id="account-register-placeholder"></div>
+        <div id="account-login-placeholder"></div>
+    </div>
+    <div id="page-content">
+        <div id="not-logged-in" class="text-center py-5 mt-5 text-secondary mx-auto shadow">
+            <img src="./img/bin-delete.png" class="img-fluid mb-3 shake-on-hover" width=60>
+            <p>Hey, you don't seem to be logged in yet!<br>Try creating a new account or logging into an existing one!</p>
+            <button class="btn btn-success m-2" onclick='showRegisterForm()'>Create Account</button>
+            <button class="btn btn-warning" onclick='showLoginForm()'>Login to Account</button>
+        </div>
+    </div>
     <script defer src="./js/navbar.js"></script>
     <script src="./js/load-title.js"></script>
     <script src="./js/account-form.js"></script>
-    <script>
+    <script defer>
+        function showRegisterForm() {
+            $("#account-hover-block").fadeIn(500)
+            $("#account-register-placeholder").show()
+            $("#account-login-placeholder").hide()
+            $("#page-content").addClass("uninteractable")
+        }
+
+        function showLoginForm() {
+            $("#account-hover-block").fadeIn(500)
+            $("#account-login-placeholder").show()
+            $("#account-register-placeholder").hide()
+            $("#page-content").addClass("uninteractable")
+        }
+
         particlesJS.load("particles-js", "./js/particles.json")
         loadWord("Account")
     </script>

@@ -1,0 +1,30 @@
+$breakpoint-mini: 500px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-large: 1200px;
+
+.form-bounds {
+    position: relative;
+    width: 60%;
+}
+.close-button {
+    top: 2em;
+    right: 2em;
+    position: absolute;
+}
+.uninteractable {
+    pointer-events: none;
+    user-select: none;
+}
+
+@media only screen and (max-width: $breakpoint-tablet) {
+    .form-bounds {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-mini) {
+    .already-have-account {
+        display: none;
+    }
+}

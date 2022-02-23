@@ -1,10 +1,12 @@
 <head>
+    <link rel="stylesheet" href="./css/forms.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/2.0.1/spinkit.min.css" integrity="sha512-kRYkjiYH/VXxoiaDK2oGNMKIi8VQVfie1lkYGX3kmfzWNR2kfaF5ze0885W3/eE6lIiURBsZA91M/WNvCajHMw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div id="login-block" class="vw-100 my-5">
-        <div id="l-form-bounds" class="mx-auto border p-3 container-fluid">
+        <div class="form-bounds bg-white mx-auto border p-4 container-fluid">
             <h2 class="text-center mb-2">Login</h2>
+            <button class="btn btn-close close-button" aria-label="Close" onclick='closeLoginForm();'></button>
             <form id="login-form">
                 <div class="form-group mb-2">
                     <label for="username-field">Username</label>
@@ -19,7 +21,7 @@
                         <input type="checkbox" class="form-check-input" id="l-remember-me">
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
-                    <a class="ms-auto link-secondary" href="#" id="switch-to-register">Don't have an account?</a>
+                    <a class="already-have-account ms-auto link-secondary" href="#" id="switch-to-register">Don't have an account?</a>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Login</button>
@@ -29,11 +31,6 @@
         </div>
     </div>
 </body>
-<style>
-    #l-form-bounds {
-        width: 60%;
-    }
-</style>
 <script>
     const loginForm = document.getElementById("login-form")
     const loginMessage = document.getElementById("l-response-message")
@@ -90,6 +87,17 @@
         setTimeout(() => {
             loginMessage.style.display = "none"
         }, 3250)
+    }
+
+    function closeLoginForm() {
+        $("#account-login-placeholder").fadeOut(750)
+        $("#account-hover-block").fadeOut(750)
+        document.getElementById("login-block").classList.add("uninteractable")
+        setTimeout(() => {
+            document.getElementById("login-block").classList.remove("uninteractable")
+            $("#account-hover-block").hide()
+            $("#page-content").removeClass("uninteractable")
+        }, 750)
     }
 </script>
 <script defer>
