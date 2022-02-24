@@ -48,6 +48,10 @@
         let username = document.getElementById("r-username-field").value
         let password = document.getElementById("r-password-field").value
         let reenter = document.getElementById("r-reenter-field").value
+        if (username.length == 0 || username.length > 16) {
+            registerFormError("Your username must be between 1-16 characters long.")
+            return
+        }
         if (password.length < 8) {
             registerFormError("Your password must be at least 8 characters long.")
             return
