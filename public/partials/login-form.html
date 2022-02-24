@@ -19,7 +19,7 @@
                 <div class="d-flex">
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="l-remember-me">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        <label class="form-check-label" for="l-remember-me">Remember Me</label>
                     </div>
                     <a class="already-have-account ms-auto link-secondary" href="#" id="switch-to-register">Don't have an account?</a>
                 </div>
@@ -38,7 +38,7 @@
     
     loginForm.addEventListener("submit", async function(e) {
         e.preventDefault();
-        loginBlock.style.pointerEvents = "none";
+        loginBlock.classList.add("uninteractable")
         loginFormPending("Sending your request, please wait.")
         let username = document.getElementById("l-username-field").value
         let password = document.getElementById("l-password-field").value
@@ -48,17 +48,18 @@
             },
             method: "POST",
             body: JSON.stringify({
-                username, password
+                username, password,
+                remember: document.getElementById("l-remember-me").checked
             })
         })
-        if (!res.ok) { // Login request fails
+        if (!res.ok) { // Register request fails
             let json = await res.json()
             loginFormError(json.msg)
-        } else { // Login request succeeds
+        } else { // Register request succeeds
             let json = await res.json()
-            alert(json.msg)
+            location.reload()
         }
-        loginBlock.style.pointerEvents = "auto";
+        loginBlock.classList.remove("uninteractable")
     });
 
     function loginFormPending(message) {
@@ -90,28 +91,29 @@
     }
 
     function closeLoginForm() {
-        $("#account-login-placeholder").fadeOut(750)
-        $("#account-hover-block").fadeOut(750)
+        $("#account-login-placeholder").fadeOut(400)
+        $("#account-hover-block").fadeOut(400)
         document.getElementById("login-block").classList.add("uninteractable")
         setTimeout(() => {
             document.getElementById("login-block").classList.remove("uninteractable")
             $("#account-hover-block").hide()
             $("#page-content").removeClass("uninteractable")
-        }, 750)
+        }, 400)
     }
 </script>
 <script defer>
     const switchToRegister = document.getElementById("switch-to-register")
     switchToRegister.onclick = function() {
-        loginBlock.style.pointerEvents = "none";
-        loginBlock.classList.add("animate__animated", "animate__fadeOut")
+        registerBlock.classList.add("uninteractable")
+        loginBlock.classList.add("animate__fadeOut")
         setTimeout(() => {
-            loginBlock.style.pointerEvents = "auto";
+            loginBlock.classList.remove("uninteractable")
+            registerBlock.classList.remove("uninteractable")
             loginBlock.style.display = "none";
-            document.getElementById("account-register-placeholder").classList.remove("animate__animated", "animate__fadeOut")
+            document.getElementById("account-register-placeholder").classList.remove("animate__fadeOut")
             document.getElementById("account-register-placeholder").style.display = "block";
-            document.getElementById("account-register-placeholder").classList.add("animate__animated", "animate__fadeIn")
-        }, 800)
+            document.getElementById("account-register-placeholder").classList.add("animate__fadeIn")
+        }, 600)
         return false
     }
 </script>

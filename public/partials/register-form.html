@@ -25,7 +25,7 @@
                 <div class="d-flex">
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="r-remember-me">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        <label class="form-check-label" for="r-remember-me">Remember Me</label>
                     </div>
                     <a class="already-have-account ms-auto link-secondary" href="#" id="switch-to-login">Already have an account?</a>
                 </div>
@@ -44,22 +44,27 @@
     
     registerForm.addEventListener("submit", async function(e) {
         e.preventDefault();
-        registerBlock.style.pointerEvents = "none";
-        registerFormPending("Sending your request, please wait.")
+        registerBlock.classList.add("uninteractable")
         let username = document.getElementById("r-username-field").value
         let password = document.getElementById("r-password-field").value
         let reenter = document.getElementById("r-reenter-field").value
+        if (password.length < 8) {
+            registerFormError("Your password must be at least 8 characters long.")
+            return
+        }
         if (password != reenter) {
             registerFormError("Your password and re-entered password do not match.")
             return
         }
+        registerFormPending("Sending your request, please wait.")
         let res = await fetch("/register", {
             headers: {
                 "Content-Type": "application/json"
             },
             method: "POST",
             body: JSON.stringify({
-                username, password
+                username, password,
+                remember: document.getElementById("r-remember-me").checked
             })
         })
         if (!res.ok) { // Register request fails
@@ -67,9 +72,9 @@
             registerFormError(json.msg)
         } else { // Register request succeeds
             let json = await res.json()
-            alert(json.msg)
+            location.reload()
         }
-        registerBlock.style.pointerEvents = "auto";
+        registerBlock.classList.remove("uninteractable")
     });
 
     function registerFormPending(message) {
@@ -77,6 +82,7 @@
         registerMessage.classList.remove("animate__fadeOut", "text-danger")
         registerMessage.classList.add("animate__fadeIn", "text-warning")
         registerMessage.textContent = message
+        registerBlock.classList.remove("uninteractable")
         setTimeout(() => {
             registerMessage.classList.add("animate__fadeOut")
             registerMessage.classList.remove("animate__fadeIn")
@@ -91,6 +97,7 @@
         registerMessage.classList.remove("animate__fadeOut", "text-warning")
         registerMessage.classList.add("animate__fadeIn", "text-danger")
         registerMessage.textContent = message
+        registerBlock.classList.remove("uninteractable")
         setTimeout(() => {
             registerMessage.classList.add("animate__fadeOut")
             registerMessage.classList.remove("animate__fadeIn")
@@ -101,28 +108,28 @@
     }
 
     function closeRegisterForm() {
-        $("#account-register-placeholder").fadeOut(750)
-        $("#account-hover-block").fadeOut(750)
+        $("#account-register-placeholder").fadeOut(400)
+        $("#account-hover-block").fadeOut(400)
         document.getElementById("register-block").classList.add("uninteractable")
         setTimeout(() => {
             document.getElementById("register-block").classList.remove("uninteractable")
             $("#account-hover-block").hide()
             $("#page-content").removeClass("uninteractable")
-        }, 750)
+        }, 400)
     }
 </script>
 <script defer>
     const switchToLogin = document.getElementById("switch-to-login")
     switchToLogin.onclick = function() {
-        registerBlock.style.pointerEvents = "none";
-        registerBlock.classList.add("animate__animated", "animate__fadeOut")
+        registerBlock.classList.add("uninteractable")
+        registerBlock.classList.add("animate__fadeOut")
         setTimeout(() => {
-            registerBlock.style.pointerEvents = "auto";
+            registerBlock.classList.remove("uninteractable")
             registerBlock.style.display = "none";
-            document.getElementById("account-login-placeholder").classList.remove("animate__animated", "animate__fadeOut")
+            document.getElementById("account-login-placeholder").classList.remove("animate__fadeOut")
             document.getElementById("account-login-placeholder").style.display = "block";
-            document.getElementById("account-login-placeholder").classList.add("animate__animated", "animate__fadeIn")
-        }, 800)
+            document.getElementById("account-login-placeholder").classList.add("animate__fadeIn")
+        }, 600)
         return false
     }
 </script>

@@ -29,15 +29,21 @@
         </div>
     </div>
     <div id="account-hover-block" style="display: none;">
-        <div id="account-register-placeholder"></div>
-        <div id="account-login-placeholder"></div>
+        <div id="account-register-placeholder" class="animate__animated"></div>
+        <div id="account-login-placeholder" class="animate__animated"></div>
     </div>
     <div id="page-content">
-        <div id="not-logged-in" class="text-center py-5 mt-5 text-secondary mx-auto shadow">
+        <div id="not-logged-in" class="text-center px-4 py-5 mt-5 text-secondary mx-auto shadow d-none">
             <img src="./img/bin-delete.png" class="img-fluid mb-3 shake-on-hover" width=60>
             <p>Hey, you don't seem to be logged in yet!<br>Try creating a new account or logging into an existing one!</p>
             <button class="btn btn-success m-2" onclick='showRegisterForm()'>Create Account</button>
             <button class="btn btn-warning" onclick='showLoginForm()'>Login to Account</button>
+        </div>
+        <div id="logged-in" class="text-center px-4 py-5 mt-5 mx-auto shadow d-none">
+            <p>Welcome to your account, <span class="username"></span>!</p>
+            <p>You created this account on <span class="dateCreated"></span>.</p>
+            <p>This page is still under construction; enjoy your stay!</p>
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
         </div>
     </div>
     <script defer src="./js/navbar.js"></script>
@@ -45,6 +51,7 @@
     <script src="./js/account-form.js"></script>
     <script defer>
         function showRegisterForm() {
+            $("#account-register-placeholder").removeClass("animate__fadeOut")
             $("#account-hover-block").fadeIn(500)
             $("#account-register-placeholder").show()
             $("#account-login-placeholder").hide()
@@ -52,6 +59,7 @@
         }
 
         function showLoginForm() {
+            $("#account-login-placeholder").removeClass("animate__fadeOut")
             $("#account-hover-block").fadeIn(500)
             $("#account-login-placeholder").show()
             $("#account-register-placeholder").hide()

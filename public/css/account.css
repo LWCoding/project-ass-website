@@ -33,12 +33,12 @@ body {
     background-position: right !important;
   }
 
-  #not-logged-in {
+  #logged-in, #not-logged-in {
     width: 75vw;
   }
 }
 @media only screen and (max-width: 768px) {
-  #not-logged-in {
+  #logged-in, #not-logged-in {
     width: 90vw;
   }
 }

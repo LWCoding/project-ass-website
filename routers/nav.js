@@ -1,7 +1,7 @@
 const express = require("express")
 const path = require("path")
 
-navRouter = express.Router()
+const navRouter = express.Router()
 
 navRouter.get("/changelogs", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/changelogs.html"))
