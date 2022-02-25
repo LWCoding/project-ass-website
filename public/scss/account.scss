@@ -34,6 +34,14 @@ body {
     z-index: -1;
 }
 
+.logo-padding {
+    padding: 1px 4px !important;
+}
+
+#new-username-input, #new-description-input, #save-new-username, #save-new-description {
+    display: none;
+}
+
 @media only screen and (min-width: $breakpoint-tablet) {
     .bg-img {
         background-position: right !important;

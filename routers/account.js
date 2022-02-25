@@ -1,6 +1,7 @@
 const express = require("express")
 const jwt = require("jsonwebtoken")
 const User = require("../models/user.js")
+const auth = require("../middleware/auth.js")
 
 const accountRouter = express.Router()
 
@@ -70,7 +71,28 @@ accountRouter.get("/info", async (req, res) => {
     }
 })
 
-accountRouter.get("/logout", (req, res) => {
+accountRouter.patch("/update", auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ["username", "description"]
+    const isValidOperator = updates.every((update) => allowedUpdates.includes(update))
+    if (!isValidOperator) {
+        return res.status(400).send("Invalid updates.")
+    }
+    try {
+        let existingUser = await User.findOne({username: req.body.username})
+        if (existingUser != null) {
+            return res.status(400).send({msg: "That username is already taken!"})
+        }
+        updates.forEach((update) => req.session.user[update] = req.body[update])
+        await req.session.user.save()
+        res.status(200).send(req.session.user)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({msg: "Your request failed to process. This may be a server-side issue."})
+    }
+})
+
+accountRouter.post("/logout", (req, res) => {
     req.session.destroy()
     res.status(200).send({})
 })

@@ -14,9 +14,14 @@ async function checkForData() {
         for (let i = 0; i < usernameSpans.length; i++) {
             usernameSpans[i].textContent = json.username
         }
+        var descriptionSpans = document.getElementsByClassName("description")
+        for (let i = 0; i < usernameSpans.length; i++) {
+            descriptionSpans[i].textContent = json.description
+        }
         var dateCreatedSpans = document.getElementsByClassName("dateCreated")
         for (let i = 0; i < dateCreatedSpans.length; i++) {
-            dateCreatedSpans[i].textContent = new Date(json.createdAt)
+            let d = new Date(json.createdAt)
+            dateCreatedSpans[i].textContent = `${d.toLocaleString('default', { month: 'long' })} ${d.getDate()}, ${d.getFullYear()}`
         }
     }
 }
@@ -24,7 +29,9 @@ async function checkForData() {
 window.onload = checkForData
 
 async function logout() {
-    const res = await fetch("/logout")
+    const res = await fetch("/logout", {
+        method: "POST"
+    })
     if (res.ok) {
         location.reload()
     }

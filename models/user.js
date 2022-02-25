@@ -8,7 +8,13 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
         minlength: 1,
-        maxlength: 20
+        maxlength: 16
+    },
+    description: {
+        type: String,
+        minlength: 1,
+        maxlength: 180,
+        default: "Hi! I'm a new user with no description. :)"
     },
     password: {
         type: String,
