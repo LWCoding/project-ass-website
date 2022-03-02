@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
     token: {
         type: String,
         required: true
+    },
+    refreshToken: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
@@ -50,10 +54,16 @@ userSchema.statics.findByCredentials = async function(username, password) {
 }
 
 userSchema.methods.generateAuthToken = async function() {
-    const token = jwt.sign({_id: this._id.toString()}, process.env.JWT_SECRET, {expiresIn: "7 days"})
+    const token = jwt.sign({_id: this._id.toString()}, process.env.JWT_SECRET, {
+        expiresIn: "10 minutes"
+    })
+    const refreshToken = jwt.sign({_id: this._id.toString()}, process.env.REFRESH_SECRET, {
+        expiresIn: "60 days"
+    })
     this.token = token
+    this.refreshToken = refreshToken
     await this.save()
-    return token
+    return { token: token, refreshToken: refreshToken }
 }
 
 userSchema.pre("save", async function(next) {

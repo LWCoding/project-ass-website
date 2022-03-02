@@ -15,10 +15,10 @@ accountRouter.post("/register", async (req, res) => {
             username: req.body.username,
             password: req.body.password
         })
-        const token = await user.generateAuthToken()
-        await user.save()
+        let tokens = await user.generateAuthToken()
         req.session.user = user
-        req.session.token = token
+        req.session.token = tokens.token
+        req.session.refreshToken = tokens.refreshToken
         if (req.body.remember == "true") {
             let date = new Date()
             let cookieExpiryDate = new date(date.getFullYear() + 1, date.getMonth(), date.getDay())
@@ -39,9 +39,10 @@ accountRouter.post("/login", async (req, res) => {
         if (user.error) {
             return res.status(400).send({msg: "Provided username and password not found in database."})
         }
-        let token = await user.generateAuthToken()
+        let tokens = await user.generateAuthToken()
         req.session.user = user
-        req.session.token = token
+        req.session.token = tokens.token
+        req.session.refreshToken = tokens.refreshToken
         if (req.body.remember === "true") {
             let date = new Date()
             let cookieExpiryDate = new Date(date.getFullYear() + 1, date.getMonth(), date.getDay())
@@ -56,19 +57,8 @@ accountRouter.post("/login", async (req, res) => {
     }
 })
 
-accountRouter.get("/info", async (req, res) => {
-    try {
-        const token = req.session.token;
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await User.findOne({_id: decoded._id, "token": token})
-        req.session.user = user
-        if (!user) {
-            throw new Error()
-        }
-        res.status(200).send(req.session.user)
-    } catch (error) {
-        res.status(400).send({error: "Not logged in!"})
-    }
+accountRouter.get("/info", auth, async (req, res) => {
+    res.status(200).send(req.session.user)
 })
 
 accountRouter.patch("/update", auth, async (req, res) => {
