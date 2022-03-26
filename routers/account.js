@@ -58,7 +58,8 @@ accountRouter.post("/login", async (req, res) => {
 })
 
 accountRouter.get("/info", auth, async (req, res) => {
-    res.status(200).send(req.session.user)
+    let currentUser = await User.findOne({refreshToken: req.session.user.refreshToken})
+    res.status(200).send(currentUser)
 })
 
 accountRouter.patch("/update", auth, async (req, res) => {
