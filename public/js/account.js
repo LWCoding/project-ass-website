@@ -36,7 +36,7 @@ function editUsername() {
 
 function editDescription() {
     normalizeInputs()
-    $("#new-description-input").val($("#description-box").text())
+    $("#new-description-input").val($("#description-box").text().substring(1, $("#description-box").text().length - 1))
     $("#new-description-input").show()
     $("#save-new-description").show()
     $("#change-description").hide()

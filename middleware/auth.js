@@ -17,7 +17,6 @@ const auth = async (req, res, next) => {
                 const refreshDecoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET)
                 const refreshUser = await User.findOne({_id: refreshDecoded._id})
                 if (refreshUser) {
-                    console.log("Generated new access token!")
                     let tokens = await refreshUser.generateAuthToken()
                     req.session.token = tokens.token
                     req.session.refreshToken = tokens.refreshToken

@@ -74,7 +74,8 @@ accountRouter.patch("/update", auth, async (req, res) => {
             return res.status(400).send({msg: "That username is already taken!"})
         }
         updates.forEach((update) => req.session.user[update] = req.body[update])
-        await req.session.user.save()
+        let currentUser = await User.findOne({refreshToken: req.session.user.refreshToken})
+        await currentUser.save()
         res.status(200).send(req.session.user)
     } catch (error) {
         console.log(error)
